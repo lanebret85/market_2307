@@ -65,4 +65,14 @@ class Market
     end
     overstock
   end
+
+  def sorted_item_list
+    items_list = []
+    total_inventory.each do |item, item_spec|
+      if item_spec[:quantity] > 0
+        items_list << item.name
+      end
+    end
+    items_list.sort
+  end
 end
