@@ -15,7 +15,7 @@ RSpec.describe Market do
     end
   end
 
-  describe "#add_vendors" do
+  describe "#add_vendor" do
     it "returns an empty array of vendors to start" do
       expect(market.vendors).to eq([])
     end
@@ -65,6 +65,10 @@ RSpec.describe Market do
       vendor2.stock(item3, 25)
 
       vendor3.stock(item1, 65)
+
+      market.add_vendor(vendor1)
+      market.add_vendor(vendor2)
+      market.add_vendor(vendor3)
 
       expect(market.vendors_that_sell(item1)).to eq([vendor1, vendor3])
       expect(market.vendors_that_sell(item4)).to eq([vendor2])
