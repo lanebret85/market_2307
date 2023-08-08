@@ -29,7 +29,6 @@ class Market
 
   def total_inventory
     market_inventory = Hash.new(0)
-    item_inventory = Hash.new(0)
     items_sold = []
     @vendors.each do |vendor|
       vendor.inventory.keys.each do |inventory_item|
@@ -53,7 +52,17 @@ class Market
       market_inventory[item] = {:quantity => inventory_array[counter], :vendors => vendors_that_sell(item)}
       counter += 1
     end
-    
+
     market_inventory
+  end
+
+  def overstocked_items
+    overstock = []
+    total_inventory.each do |item, item_spec|
+      if item_spec[:quantity] > 50 && item_spec[:vendors].count > 1
+        overstock << item
+      end
+    end
+    overstock
   end
 end
